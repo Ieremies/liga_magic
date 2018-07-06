@@ -37,7 +37,7 @@ def menu():
         except:
             print("Invalido, tente novamente")
 
-    return frete
+    return (frete, qualidade_min)
 
 def calcular(lista_comp):
     compra = []
@@ -96,15 +96,15 @@ def cls():
 
 lista = ler_deck()
 aux = lista.copy()
-frete = menu()
+frete, qualidade_min = menu()
 
 while True:
     cls()
     imprimir(aux.final(calcular(aux.copy())))
-    comand = input("Press 1-Remover carta   Q-Sair    ")
+    comand = input("Press 1-Remover carta   2-Adicionar carta  Q-Sair    ")
     if comand == "q" or comand == "Q":
         break
-    if comand:
+    if comand == "1":
         print("Escolha (pelo número) qual carta deseja remover da lista antes de ser recalculada (pode colocar uma lista de números também):")
         aux.imprime_nome_cartas()
         rem = input().split()
@@ -113,3 +113,9 @@ while True:
             list_rem.append(aux.index(int(i)))
         for i in list_rem:
             aux.remove(i)
+    if comand == "2":
+        nome = input("Digite o nome da carta:   ")
+        craw.gerar_lista_de_ofertas_carta(nome, aux)
+        craw.gerar_lista_de_ofertas_carta(nome, lista)
+        aux.remove_frete(frete)
+        aux.remove_qualidade(qualidade_min)
