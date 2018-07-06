@@ -1,7 +1,6 @@
-import subprocess
 import re
-import sys
 import objetos
+import requests
 
 
 def pegar_nome(nome):
@@ -21,14 +20,15 @@ def pegar_nome(nome):
     return (nome_separado, nome_junto)
 
 def get_source(nome_separado, nome_junto):
-    print(nome_junto)
+    print(nome_junto, end ='')
 
     url = "https://www.ligamagic.com.br/?view=cards%2Fsearch&card=" + nome_separado[0]
     for i in range(1, len(nome_separado)):
         url += "+" + nome_separado[i]
 
     try:
-        source = str(subprocess.check_output(['curl', '-s' ,url]))
+        r = requests.get(url)
+        source = str(r.content)
     except:
         print("\nConfira sua internet ou leia o README.txt pra mais informações")
         raise ValueError
@@ -45,6 +45,8 @@ def get_source(nome_separado, nome_junto):
         nome_separado, nome_junto = pegar_nome(aux)
         print()
         return get_source(nome_separado, nome_junto)
+
+    print("!")
 
     source = source.split('line')
     return source[1:]

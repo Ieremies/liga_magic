@@ -1,6 +1,4 @@
-import subprocess
 import re
-import sys
 import objetos
 import craw
 
