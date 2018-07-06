@@ -3,13 +3,13 @@
 PRÉ-REQUISITOS:
 
 > Ter instalado e atualizado o interpretador de Python3 ou superior - caso não tenha, visite https://www.python.org/ e siga as instruções na página
-> Ter instalado e atualizado o software cUrl - caso não tenha, visite https://curl.haxx.se/ e siga as instruções na página
 
 
 I N S T R U Ç Õ E S:
 
 > Coloque a lista de cartas que deseja otimizar a compra no arquivo 'deck.txt' localizado na mesma pasta do arquivo 'main.py'
 > Quando estiver pronto, lembre-se de salvar o arquivo e execute 'main.py' pelo programa Pyhton3
+
 
 CAPACIDADES:
 
@@ -28,11 +28,12 @@ INCAPACIDADES:
 > Linhas vazias irão para o programa
 > Cartas que possuem caractere especial no nome, como por exemplo, "Give // Take"
 > Analizar para características específicas como "promo" e "foil"
+> Cartas que possuem seu nome dentro do nome de outras cartas, darão erro devido a natureza do site da LigaMagic
 
 
 DISCLAIMER:
 
-> O problema na qual esse programa tenta resolver é considerado impossível de resolver em uma escala de tempo humana de forma >perfeita<. O que esse programa vai te fornecer é uma >boa opção< de compra, mas não necessáriamente >a melhor<, devido a impossibilidade computacional de chegar com certeza a ela.
+> O problema o qual esse programa tenta resolver é considerado impossível de resolver em uma escala de tempo humana de forma >perfeita<. O que esse programa vai te fornecer é uma >boa opção< de compra, mas não necessáriamente >a melhor<, devido a impossibilidade computacional de chegar com certeza a ela.
 
 
 A SER ADICIONADO:
@@ -42,6 +43,7 @@ A SER ADICIONADO:
 > Dar como output um arquivo
 > Corrigir edições e nome das lojas
 
+
 ERROS E SUGESTÕES:
 
 > Enviar para ieremies@gmail.com
@@ -50,10 +52,3 @@ Obrigado por usar meu software!
 
 "It's actually quite simple, but since you've only recently begun to walk upright, it may take some time to explain."
 —Jace Beleren, to Garruk Wildspeaker
-
-
-
----------------------------------------------
-
-SUBSTITUIR O CURL POR UM ABIBLIOTECA INERENTE DO Python3
-CORRIGIR AS CARTAS QUE POSSUEM UMA PARTE DELA EM OTRA

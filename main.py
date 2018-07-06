@@ -2,8 +2,6 @@ import re
 import objetos
 import craw
 
-# TODO: salvar os valores logo dps de pega-los pra que toda vez que eu refizer a conta não ter que baixar d enovo a não ser que a ultima autalização tenha sido a mais de um dia
-
 def ler_deck():
     print("Fazendo o download dos preços...")
     lista = objetos.compra()
@@ -22,7 +20,7 @@ def menu():
     print()
     while True:
         try:
-            qualidade_min = int(input("Digite a qualidade mínima: (1 = M, 2 = NM, 3 = SP, 4 = MP, 5 = HP ou 6 = D)    "))
+            qualidade_min = int(input("Digite a qualidade mínima: (1 = M, 2 = NM, 3 = SP, 4 = MP, 5 = HP ou 6 = D)  "))
             lista.remove_qualidade(qualidade_min)
             break
         except:
