@@ -5,9 +5,15 @@ class compra:
     def inclui(self, carta):
         self.lista_de_cartas.append(carta)
 
-    def imprime(self):
-        for carta in self.lista_de_cartas:
-            carta.imprime()
+    def imprime_nome_cartas(self):
+        for i in range(len(self.lista_de_cartas)):
+            print(i, "-", self.lista_de_cartas[i].nome)
+
+    def remove(self, x):
+        self.lista_de_cartas.remove(x)
+
+    def index(self, x):
+        return self.lista_de_cartas[x]
 
     def remove_qualidade(self, q):
         for carta in self.lista_de_cartas:
@@ -37,6 +43,7 @@ class compra:
         for carta in self.lista_de_cartas:
             aux.append(carta.final(compra))
         return aux
+
 
 class oferta:
     def __init__(self, loja, preco, qualidade, edicao):
@@ -85,11 +92,6 @@ class carta:
         for outra in self.lista[1:]:
             if outra.preco > valor_prim:
                 self.lista.remove(outra)
-
-    def imprime(self):
-        print('-'*50, '\n', self.nome, '\n')
-        for ofert in self.lista:
-            ofert.imprime()
 
     def calcula(self, dict):
         pont = self.lista[-1].preco - self.lista[0].preco

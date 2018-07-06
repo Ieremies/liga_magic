@@ -46,7 +46,8 @@ A SER ADICIONADO:
 
 ERROS E SUGESTÕES:
 
-> Enviar para ieremies@gmail.com
+> Caso qualquer coisa não saia como o esperado, envie "deck.txt" para ieremies@gmail.com e eu irei corrigir :D
+
 
 Obrigado por usar meu software!
 

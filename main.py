@@ -1,6 +1,7 @@
 import re
 import objetos
 import craw
+import os
 
 def ler_deck():
     print("Fazendo o download dos preços...")
@@ -38,18 +39,18 @@ def menu():
 
     return frete
 
-def calcular(lista):
+def calcular(lista_comp):
     compra = []
     qtd = 0
-    while not lista.lista_de_cartas == []:
-        if len(lista.lista_de_cartas) == 1:
+    while not lista_comp.lista_de_cartas == []:
+        if len(lista_comp.lista_de_cartas) == 1:
             qtd += 1
             if qtd == 2:
-                print("\n\nInfelizmente a carta", lista.lista_de_cartas[0].nome, "deve ser retirada do deck para que possamos calcular\n")
+                print("\n\nInfelizmente a carta", lista_comp.lista_de_cartas[0].nome, "deve ser retirada do deck para que possamos calcular\n")
                 raise ValueError
                 break
 
-        pont = lista.calcula()
+        pont = lista_comp.calcula()
 
         maior_valor = 0
         loja = ''
@@ -61,20 +62,18 @@ def calcular(lista):
                 loja = key
         compra.append(loja)
         for i in aux:
-            for j in lista.lista_de_cartas:
+            for j in lista_comp.lista_de_cartas:
                 if i == j.nome:
-                    lista.lista_de_cartas.remove(j)
+                    lista_comp.lista_de_cartas.remove(j)
                     break
     return compra
 
-# TODO: cuidar da excessão de quando uma carta ficar sem ofertas válidas
-
-def imprimir():
+def imprimir(lista_impr):
     qualid = ["n/a", "M  ", "NM ", "SP ", "MP ", "HP ", "D  "]
-    lista_final.sort()
+    lista_impr.sort()
     valor_total = 0
     print('\n\n\n' + "Loja", " "*20, "Carta", ' '*28, 'Edição', ' '*21, 'Qualidade', ' '* 5, 'Diferença', ' '*4, "Preço", '\n')
-    for i in lista_final:
+    for i in lista_impr:
         print(i[0], ' '*(25 - len(i[0])), end='')
         print(i[1], ' '*(34 - len(i[1])), end='')
         print(i[2], ' '*(28 - len(i[2])), end='')
@@ -84,18 +83,33 @@ def imprimir():
         valor_total += i[5]
 
     lojas = 1
-    for i in range(len(lista_final)-1):
-        if lista_final[i][0] != lista_final[i+1][0]:
+    for i in range(len(lista_impr)-1):
+        if lista_impr[i][0] != lista_impr[i+1][0]:
             lojas += 1
 
     print()
     print(' '*104, 'valor total: R$ %2.2f' %valor_total)
     print(' '*104, '  com frete: R$ %2.2f' %(valor_total+(lojas*frete)))
 
+def cls():
+    os.system('cls' if os.name=='nt' else 'clear')
 
 lista = ler_deck()
+aux = lista.copy()
 frete = menu()
-compra = calcular(lista.copy())
-lista_final = lista.final(compra)
-imprimir()
-fim = input("Press enter to exit    ")
+
+while True:
+    cls()
+    imprimir(aux.final(calcular(aux.copy())))
+    comand = input("Press 1-Remover carta   Q-Sair    ")
+    if comand == "q" or comand == "Q":
+        break
+    if comand:
+        print("Escolha (pelo número) qual carta deseja remover da lista antes de ser recalculada (pode colocar uma lista de números também):")
+        aux.imprime_nome_cartas()
+        rem = input().split()
+        list_rem = []
+        for i in rem:
+            list_rem.append(aux.index(int(i)))
+        for i in list_rem:
+            aux.remove(i)

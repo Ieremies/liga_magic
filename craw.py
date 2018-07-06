@@ -2,6 +2,13 @@ import re
 import objetos
 import requests
 
+over = re.compile(r'Oversize')
+loja = re.compile(r'title=\"(?!Visitar Loja)[\w\s\d]*')
+preco = re.compile(r'R. \d?\d?\d?\d,\d\d')
+edicao = re.compile(r'e-mob-edicao-lbl"><p>[\w\s]*')
+qualidade = re.compile(r'cardQualidade.\d.')
+
+lands = ["floresta", "forest", "island", "ilha", "swamp", "pantano", "pântano", "planície", "planicie", "plains"]
 
 def pegar_nome(nome):
     nome_separado = nome.split()
@@ -40,8 +47,10 @@ def get_source(nome_separado, nome_junto):
         lim_sup = int(source.index(sup))
         source = source[lim_inf:lim_sup]
     except:
-        print("\nConfira a carta", nome_junto + '. Corrija-a, por favor, ou tente trocar a língua:  ', end="")
+        print("\nConfira a carta", nome_junto + '. Corrija-a, por favor, ou tente trocar a língua (caso deseja ignorar, digite \"ignore\"):  ', end="")
         aux = input()
+        if aux == "ignore":
+            return 0
         nome_separado, nome_junto = pegar_nome(aux)
         print()
         return get_source(nome_separado, nome_junto)
@@ -53,12 +62,6 @@ def get_source(nome_separado, nome_junto):
 
 def gerar_lista_de_ofertas_carta(nome, lista):
 
-    over = re.compile(r'Oversize')
-    loja = re.compile(r'title=\"(?!Visitar Loja)[\w\s\d]*')
-    preco = re.compile(r'R. \d?\d?\d?\d,\d\d')
-    edicao = re.compile(r'e-mob-edicao-lbl"><p>[\w\s]*')
-    qualidade = re.compile(r'cardQualidade.\d.')
-
     def pegar_preco(price):
         for i in range(len(price)):
             price[i] = float(price[i][3:].replace(',','.'))
@@ -69,7 +72,13 @@ def gerar_lista_de_ofertas_carta(nome, lista):
             pass
 
     nome_separado, nome_junto = pegar_nome(nome)
+
+    if nome_junto.lower() in lands:
+        return
+
     source = get_source(nome_separado, nome_junto)
+    if source == 0:
+        return
     atual = objetos.carta(nome_junto)
 
     for i in source:
