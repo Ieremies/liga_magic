@@ -6,13 +6,10 @@ import os
 def ler_deck():
     print("Fazendo o download dos preços...")
     lista = objetos.compra()
-    nome_do_arq = 'deck.txt'
-    deck = open(nome_do_arq, 'r')
-    atual = 'aa'
-    while True:
-        atual = deck.readline()
+    deck = open('deck.txt', 'r')
+    for atual in deck:
         if atual.split() == []:
-            break
+            continue
         craw.gerar_lista_de_ofertas_carta(atual, lista)
     deck.close()
     return lista
@@ -116,6 +113,6 @@ while True:
     if comand == "2":
         nome = input("Digite o nome da carta:   ")
         craw.gerar_lista_de_ofertas_carta(nome, aux)
-        craw.gerar_lista_de_ofertas_carta(nome, lista)
+        #craw.gerar_lista_de_ofertas_carta(nome, lista)
         aux.remove_frete(frete)
         aux.remove_qualidade(qualidade_min)
