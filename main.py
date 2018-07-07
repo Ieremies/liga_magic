@@ -72,9 +72,9 @@ def imprimir(lista_impr):
     qualid = ["n/a", "M  ", "NM ", "SP ", "MP ", "HP ", "D  "]
     lista_impr.sort()
     valor_total = 0
-    print('\n\n\n' + "Loja", " "*20, "Carta", ' '*28, 'Edição', ' '*21, 'Qualidade', ' '* 5, 'Diferença', ' '*4, "Preço", '\n')
+    print('\n\n\n' + "Loja", " "*22, "Carta", ' '*28, 'Edição', ' '*21, 'Qualidade', ' '* 5, 'Diferença', ' '*4, "Preço", '\n')
     for i in lista_impr:
-        print(i[0], ' '*(25 - len(i[0])), end='')
+        print(i[0], ' '*(27 - len(i[0])), end='')
         print(i[1], ' '*(34 - len(i[1])), end='')
         print(i[2], ' '*(28 - len(i[2])), end='')
         print(qualid[i[3]], ' '*12, end='')
@@ -88,8 +88,8 @@ def imprimir(lista_impr):
             lojas += 1
 
     print()
-    print(' '*104, 'valor total: R$ %2.2f' %valor_total)
-    print(' '*104, '  com frete: R$ %2.2f' %(valor_total+(lojas*frete)))
+    print(' '*106, 'valor total: R$ %2.2f' %valor_total)
+    print(' '*106, '  com frete: R$ %2.2f' %(valor_total+(lojas*frete)))
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')

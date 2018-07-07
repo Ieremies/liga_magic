@@ -1,6 +1,6 @@
 import re
 import objetos
-import requests
+import urllib.request
 
 over = re.compile(r'Oversize')
 loja = re.compile(r'title=\"(?!Visitar Loja)[\w\s\d]*')
@@ -10,7 +10,17 @@ qualidade = re.compile(r'cardQualidade.\d.')
 
 lands = ["floresta", "forest", "island", "ilha", "swamp", "pantano", "pântano", "planície", "planicie", "plains"]
 
+encode = {"ç": "c", "ã": "a", "õ": "o", "â": "a", "á": "a", "à": "a", "é": "e", "ê": "e", "í": "i", "ó": "o", "ô": "o", "ú": "u"}
+
 def pegar_nome(nome):
+    for i in encode.keys():
+        while True:
+            try:
+                nome.index(i)
+                nome = nome.replace(i, encode[i])
+            except:
+                break
+
     nome_separado = nome.split()
     try:
         if nome_separado[0][-1] == 'x':
@@ -34,8 +44,9 @@ def get_source(nome_separado, nome_junto):
         url += "+" + nome_separado[i]
 
     try:
-        r = requests.get(url)
-        source = str(r.content)
+        r = urllib.request.urlopen(url)
+        source = r.read()
+        source = str(source)
     except:
         print("\nConfira sua internet ou leia o README.txt pra mais informações")
         raise ValueError
