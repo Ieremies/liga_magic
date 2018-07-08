@@ -1,6 +1,7 @@
 import re
 import objetos
 import urllib.request
+import compra
 
 over = re.compile(r'Oversize')
 loja = re.compile(r'title=\"(?!Visitar Loja)[\w\s\d]*')

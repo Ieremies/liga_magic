@@ -32,7 +32,6 @@
 
   INCAPACIDADES:
 
-> Linhas vazias irão parar o programa
 > Cartas que possuem caractere especial no nome, como por exemplo, "Give // Take" não serão lidas
 > Analizar para características específicas como "promo" e "foil"
 > Cartas que possuem seu nome dentro do nome de outras cartas, devido a natureza do site da LigaMagic, como por exemplo, "By Force"
