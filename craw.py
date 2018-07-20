@@ -9,7 +9,7 @@ preco = re.compile(r'R. \d?\d?\d?\d,\d\d')
 edicao = re.compile(r'e-mob-edicao-lbl"><p>[\w\s]*')
 qualidade = re.compile(r'cardQualidade.\d.')
 
-lands = ["floresta", "forest", "island", "ilha", "swamp", "pantano", "pântano", "planície", "planicie", "plains"]
+lands = ["floresta", "forest", "island", "ilha", "swamp", "pantano", "pântano", "planície", "planicie", "plains", "montanha", "mountain"]
 
 encode = {"ç": "c", "ã": "a", "õ": "o", "â": "a", "á": "a", "à": "a", "é": "e", "ê": "e", "í": "i", "ó": "o", "ô": "o", "ú": "u"}
 
@@ -40,7 +40,7 @@ def pegar_nome(nome):
 def get_source(nome_separado, nome_junto):
     print(nome_junto, end ='')
 
-    url = "https://www.ligamagic.com.br/?view=cards%2Fsearch&card=" + nome_separado[0]
+    url = "https://ligamagic.com.br/?view=cards/card&card=" + nome_separado[0]
     for i in range(1, len(nome_separado)):
         url += "+" + nome_separado[i]
 
@@ -49,7 +49,7 @@ def get_source(nome_separado, nome_junto):
         source = r.read()
         source = str(source)
     except:
-        print("\nConfira sua internet ou leia o README.txt pra mais informações")
+        print("\nConfira sua internet ou leia o README.txt para mais informações")
         raise ValueError
 
     inf = 'marketplace-lojas'

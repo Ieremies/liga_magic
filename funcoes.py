@@ -3,16 +3,19 @@ import craw
 import compra
 import os
 
-
 def ler_deck():
     print("Fazendo o download dos preços...")
     lista = compra.compra()
     deck = open('deck.txt', 'r')
+    aux = []
     for atual in deck:
-        if atual.split() == []:
-            continue
-        craw.gerar_lista_de_ofertas_carta(atual, lista)
+        if atual.split() != []:
+            lixo, nome = craw.pegar_nome(atual)
+            aux.append(nome)
     deck.close()
+    aux.sort()
+    for atual in aux:
+        craw.gerar_lista_de_ofertas_carta(atual, lista)
     return lista
 
 def calcular(lista_comp):
