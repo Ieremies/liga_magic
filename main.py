@@ -50,3 +50,5 @@ while True:
         #craw.gerar_lista_de_ofertas_carta(nome, lista)
         aux.remove_frete(frete)
         aux.remove_qualidade(qualidade_min)
+
+funcoes.salvar(aux.final(funcoes.calcular(aux.copy()), frete), frete)

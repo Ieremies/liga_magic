@@ -2,6 +2,9 @@ import objetos
 import craw
 import compra
 import os
+import csv
+
+qualid = ["n/a", "M  ", "NM ", "SP ", "MP ", "HP ", "D  "]
 
 def ler_deck():
     print("Fazendo o download dos preços...")
@@ -47,7 +50,6 @@ def calcular(lista_comp):
     return compra
 
 def imprimir(lista_impr, frete):
-    qualid = ["n/a", "M  ", "NM ", "SP ", "MP ", "HP ", "D  "]
     lista_impr.sort()
     valor_total = 0
     print('\n\n\n' + "Loja", " "*22, "Carta", ' '*28, 'Edição', ' '*21, 'Qualidade', ' '* 5, 'Diferença', ' '*4, "Preço", '\n')
@@ -71,3 +73,13 @@ def imprimir(lista_impr, frete):
 
 def cls():
     os.system('cls' if os.name=='nt' else 'clear')
+
+def salvar(lista, frete):
+    valor_total=0
+    with open("resultado.csv", "w", newline='') as file:
+        writer = csv.writer(file, delimiter=';', quoting=csv.QUOTE_MINIMAL)
+        writer.writerow(["Loja ", "Carta ", 'Edição ','Qualidade ', 'Diferença ', "Preço "])
+
+        for i in lista:
+            writer.writerow([i[0], i[1], i[2], qualid[i[3]], '%2.2f' %i[4], '%2.2f' %i[5]])
+            valor_total += i[5]
